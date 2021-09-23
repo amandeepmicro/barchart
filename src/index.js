@@ -71,18 +71,6 @@ let parsedData = data1.map((d) => {
 });
 // [{vehicle: "UK04CB3871",count: 11,sum: 39679}]
 console.log(parsedData);
-//////////////////////////////////////
-// let tip = d3
-//   .select(".chart-container")
-//   .append("div")
-//   .attr("class", "tip")
-//   .style("position", "absolute")
-//   .style("z-index", "10")
-//   .style("visibility", "hidden");
-
-// var tooltipEl = function (d) {
-//   return "<div>" + d.count + "</div>";
-// };
 
 // create svg
 let svg = d3.select("svg#top10Vehicle"),
@@ -147,6 +135,7 @@ g.selectAll(".bar")
   .enter()
   .append("rect")
   .style("fill", "url(#bg-gradient)")
+  .style("cursor", "pointer")
   .attr("class", "bar")
   .attr("x", function (d, i) {
     return xScale(d.vehicle);
@@ -157,20 +146,8 @@ g.selectAll(".bar")
   .attr("width", xScale.bandwidth()) //
   .attr("height", function (d) {
     return height - yScale(d.count);
+  })
+
+  .on("click", function (d) {
+    console.log(d);
   });
-// .on("mouseover", function (d) {
-//   // tip.transition().duration(200).style("visibility", "visible");
-//   // tip.html(tooltipEl(d));
-//   // tip
-//   //   .style("left", d3.event.pageX - 20 + "px")
-//   //   .style("top", yScale(d.count) - 13 + "px");
-//   return tip
-//     .text(d.count)
-//     .style("visibility", "visible")
-//     .style("top", yScale(d.count) - 10 + "px")
-//     .style("left", xScale(d.vehicle) + 155 + "px");
-// })
-// //.on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-// .on("mouseout", function () {
-//   return tip.transition().duration(200).style("visibility", "hidden");
-// });
